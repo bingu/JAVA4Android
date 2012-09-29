@@ -10,7 +10,7 @@ JDK有好几个类型版本，我们只需要选择Java SE类型的版本就行�
 这里作为开发人员，我们选择JDK而不是JRE。
 官方提供不同平台的版本可供下载，对于Windows平台，有32位和64位两种，根据自己电脑的Windows平台的版本进行相应选择。
 
-[下载网址]<http://www.oracle.com/technetwork/java/javase/downloads/index.html>
+下载网址:<http://www.oracle.com/technetwork/java/javase/downloads/index.html>
 #### 2. 安装 JDK
 
 自定义安装路径后，一路Next。
@@ -52,7 +52,7 @@ Eclipse的下载主页为：<http://www.eclipse.org/downloads/>
 
 一路Next就好，一旦下载安装成功会提示你重启Eclipse，点击“RestartNow”按钮重启Eclipse。
 
-最新的Android SDK在 [http://developer.android.com/sdk/index.html](http://developer.android.com/sdk/index.html) 下载。
+最新的Android SDK在 <http://developer.android.com/sdk/index.html> 下载。
 
 SDK共支持三种平台Windows，Linux和Mac OS X。根据自己电脑的操作系统环境选择相应的版本。直接使用zip文件版本就行了。下载后把zip文件解压缩，放到自己喜欢的目录下。从Eclipse的菜单Window->Preferences中打开Preferences窗口，鼠标点击左边的Android，然后在右边点击“Browse”按钮设置Android SDK 的位置，就是前面下载的Android SDK解压缩后的位置。
 
