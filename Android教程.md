@@ -10,7 +10,7 @@ JDK有好几个类型版本，我们只需要选择Java SE类型的版本就行�
 这里作为开发人员，我们选择JDK而不是JRE。
 官方提供不同平台的版本可供下载，对于Windows平台，有32位和64位两种，根据自己电脑的Windows平台的版本进行相应选择。
 
-[下载网址](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+[下载网址]<http://www.oracle.com/technetwork/java/javase/downloads/index.html>
 #### 2. 安装 JDK
 
 自定义安装路径后，一路Next。
@@ -36,7 +36,7 @@ CMD中输入：java -version，并回车。
 
 在前面我们配置好了JDK环境后，就可以开始配置Android的集成开发环境了，官方Google推荐的集成开发环境为Eclipse，所以我们就以Eclipse作为集成开发环境。无论是在Linux平台上开发还是在Windows平台上开发，我们只需要下载相应平台的Eclipse版本就可以了。具体在Eclipse上的开发过程，都是相同的。Eclipse是一个开放的集成开发环境，所谓开放，是指其既是源代码开源（即Eclipse本身的源代码是开源的），又是指其具有良好的扩展性（既可以在Eclipse上开发插件也可以开发像Eclipse这样风格的应用程序）。
 
-Eclipse的下载主页为：[http://www.eclipse.org/downloads/](http://www.eclipse.org/downloads/)
+Eclipse的下载主页为：<http://www.eclipse.org/downloads/>
 
 对于Android开发，我们下载Eclipse IDE for Java EE Developers版本，这个虽然是针对J2EE的开发版本，但插件比较全，也适合Android开发。每一个平台都对应32位和64位两种版本，根据自己电脑的操作系统情况选择相应的版本。
 
@@ -166,7 +166,7 @@ SDK共支持三种平台Windows，Linux和Mac OS X。根据自己电脑的操作
 
 Android的图形用户界面使用View和ViewGroup的层级类进行创建。View类是通用的UI窗体小部件，比如按钮或者文本框，而ViewGroup是用于定义子View布局的可视化容器，比如网格部件(grid)和垂直列表部件(list)。
 
-Android提供了对应于View和ViewGroup子类的XMl查询表，你可以在XML里使用层级视图元素创建自己的UI。
+Android提供了对应于View和ViewGroup子类的XML查询表，你可以在XML里使用层级视图元素创建自己的UI。
 
 ViewGroup类在布局里形成的分支并且包含View类。
 
@@ -427,7 +427,7 @@ DisplayMessageActivity完整的onCreate()方法现在看起来如下：
 		TextView textView = new TextView(this);
 		textView.setTextSize(40);
 		textView.setText(message);
- 
+	
 		setContentView(textView);
 	}
  
