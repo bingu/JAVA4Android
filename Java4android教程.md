@@ -926,6 +926,182 @@ Test.java
 		}
 	}
 
+### 接口的应用
+
+1. 为什么要使用接口
+
+2. 工厂方法模式
+
+Printer.java
+
+	interface Printer{
+		public void open();
+
+		public void close();
+
+		public void print(String text);
+	}
+
+HPPrinter.java
+
+	class HPPrinter implements Printer{
+	    public void open(){
+	        System.out.println("HPPrinter open");
+	    }
+	    public void close(){
+	        System.out.println("HPPrinter close");
+	    }
+	    public void print(String text){
+	        System.out.println("HPPrinter print" + text);
+	    }
+	}
+
+CanonPrinter.java
+
+	class CanonPrinter implements Printer{
+	    public void open(){
+	        System.out.println("CanonPrinter open");
+	    }
+	    public void close(){
+	        System.out.println("CanonPrinter close");
+	    }
+	    public void print(String text){
+	        System.out.println("CanonPrinter print" + text);
+	    }
+	}
+
+XXXPrinter.java
+
+	class XXXPrinter implements Printer{
+	    public void open(){
+	        System.out.println("XXXPrinter open");
+	    }
+	    public void close(){
+	        System.out.println("XXXPrinter close");
+	    }
+	    public void print(String text){
+	        System.out.println("XXXPrinter print" + text);
+	    }
+	}
+
+PrinterFactory.java
+
+	class PrinterFactory{
+	    public static Printer getPrinter(int flag){
+	        Printer printer = null;
+	        if (flag == 0){
+	            printer = new HPPrinter();
+	        }
+	        else if (flag == 1){
+	            printer = new CanonPrinter();
+	        }
+	        else if (flag == 2){
+	            printer = new XXXPrinter();
+	        }
+	        return printer;
+	    }
+	}
+
+Test.java
+
+	class Test{
+	    public static void main(String[] args){
+	        // 根据用户的选择，生成相应的打印机对象
+	        // 并且向上转型为 Printer 类型
+	        // Printer getPrinter(int flag)
+
+	        int flag = 1;
+	        Printer printer = PrinterFactory.getPrinter(flag);
+	        printer.open();
+	        printer.print("test");
+	        printer.close();
+	    }
+	}
+
+## **JAVA 当中的异常**
+
+1. 什么是异常
+
+	异常：中断了正常指令流的事件。
+	程序员对 Error 无能为力，只能处理 Exception。
+	对异常的处理关系到系统的健壮性。
+
+2. 异常的分类
+
+	分为 Exception 和 Error 两大类。
+
+3. 使用 try ... catch .... finally 来处理可能出现异常的代码。
+
+	    try{
+		    // 打开文件
+			// 操作文件
+		}
+		catch(Exception e){
+			// 如果出现异常，打印异常信息。
+			e.printStackTrace();
+		}
+		finally{
+			// 关闭文件
+			// 不管是不是出现异常，均会执行 finally 里的代码段
+		}
+
+4. throw 的作用
+
+	主动抛出异常
+
+User.java
+
+	class User{
+		private int age;
+
+		public void setAge(int age){
+			if (age < 0){
+				RuntimeException e = new RuntimeException("年龄不能为负数");
+				throw e;
+			}
+			this.age = age;
+		}
+	}
+
+Test.java
+
+	class Test{
+		public static void main(String args[]){
+			User user = new User();
+			user.setAge(-20);
+		}
+	}
+
+5. throws 的作用
+
+User.java
+
+	class User{
+		private int age;
+
+		public void setAge(int age) throws Exception{
+			if (age < 0){
+				Exception e = new Exception("年龄不能为负数");
+				throw e;
+			}
+			this.age = age;
+		}
+	}
+
+Test.java
+
+	class Test{
+		public static void main(String args[]){
+			User user = new User();
+			try{
+				user.setAge(-20);
+			}
+			catch(Exception){
+				System.out.println(e);
+			}
+		}
+	}
+
 ## **多线程与多进程**
 
 **多进程**：
@@ -935,4 +1111,3 @@ Test.java
 **多线程**：
 
 	在同一应用程序总有多个顺序流（同时）执行
-
