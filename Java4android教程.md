@@ -1102,6 +1102,255 @@ Test.java
 		}
 	}
 
+## **JAVA当中的IO**
+
+1. I/O 操作的目标
+
+	从数据源当中读取数据以及将数据写入到数据目的地当中；
+
+2. IO 的分类方法
+
+	* 第一种分法：1.输入流；2.输出流。
+
+	* 第二种分法：1.字节流；2.字符流。
+
+	* 第三种分法：1.节点流；2.处理流。
+
+3. 读取文件和写入文件的方法
+
+Test.java
+
+	// 第一个步骤：导入 IO 类；
+	import java.io.* ;
+
+	class Test{
+
+		public static void main(String args[]){
+			// 声明输入流引用
+			FileInputStream fis = null;
+			// 声明输出流引用
+			FileOutputStream fos = null;
+
+			try{
+				// 生成代表输入流的对象  
+				fis = new FileInputStream("/home/bingu/project/java/j4a32/from.txt");
+
+				// 生成代表输出流的对象
+				fos = new FileOutputStrem("/home/bingu/project/java/j4a32/to.txt");
+
+				// 生成一个字节数值
+				byte [] buffer = new byte[100];
+				// 调用输入流对象的 read 方法，读取数据
+				int temp = fis.read(buffer,0,buffer.length);
+
+				fos.write(buffer,0,temp);
+
+				//String s = new String(buffer).trim();
+
+				//System.out.println(s);
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
+		}
+	}
+
+### 大文件的读写方法
+
+	循环读取数据，到达数据末端则停止循环。
+
+Test.java
+
+	// 第一个步骤：导入 IO 类；
+	import java.io.* ;
+
+	class Test{
+
+		public static void main(String args[]){
+			// 声明输入流引用
+			FileInputStream fis = null;
+			// 声明输出流引用
+			FileOutputStream fos = null;
+
+			try{
+				// 生成代表输入流的对象  
+				fis = new FileInputStream("/home/bingu/project/java/j4a32/from.txt");
+
+				// 生成代表输出流的对象
+				fos = new FileOutputStrem("/home/bingu/project/java/j4a32/to.txt");
+
+				// 生成一个字节数值
+				byte [] buffer = new byte[1024];
+				while(true){
+					// 调用输入流对象的 read 方法，读取数据
+					int temp = fis.read(buffer,0,buffer.length);
+					if (temp == -1){
+						break;
+					}
+					fos.write(buffer,0,temp);
+			    }
+
+				//String s = new String(buffer).trim();
+
+				//System.out.println(s);
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
+			finally{
+				try{
+					fis.close();
+					fos.close();
+				}
+				catch(Exception e){
+					System.out.println(e);
+				}
+			}
+		}
+	}
+
+### 字符流的使用方法
+
+	由下面的例子可以看到字符流的方法基本是跟字节流的方法是一致的。
+
+TestChar.java
+
+	import java.io.* ;
+
+	class TestChar{
+		// 字符流：读写文件时，以字符为基础
+		// 字节输入流：Reader <-- FileReader int read(char [] c, int off, int len);
+		// 字节输出流：Writer <-- FileWriter void write(char [] c, int off, int len);
+
+		public static void main(String [] args){
+			FileReader fr = null;
+			FileWriter fw = null;
+
+			try{
+				fr = new FileReader("/home/bingu/project/java/j4a33/from.txt");
+				fw = new FileWriter("/home/bingu/project/java/j4a33/to2.txt");
+
+				char [] buffer = new char[100];
+				while(true){
+					int temp = fr.read(buffer, 0, buffer.length);
+					if (temp == -1){
+						break;
+				    }
+					fw.write(buffer, 0, temp);
+			    }
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
+			finally{
+				try{
+					fr.close();
+					fw.close();
+				}
+				catch(Exception e){
+					System.out.println(e);
+				}
+			}
+		}
+	}
+
+### 处理流使用实例
+
+#### BufferedReader介绍
+
+public String readLine()
+	throwsIOException
+
+生成 BUfferedReader 对象的方法：
+BufferedReader in = new BufferedReader(newFileReader("foo.in"));
+
+Test.java
+
+    import java.io.* ;
+	class Test{
+		public static void main(String args []){
+			FileReader fileReader = null;
+			BufferedReader bufferedReader = null;
+
+			try{
+			    fileReader = new FileReader("/home/bingu/project/java/j4a34/users.txt");
+				bufferedReader = new BufferedReader(fileReader);
+				while(true){
+					String line = bufferedReader.readLine();
+					if (line == null){
+						break;
+					}
+					System.out.println(line);
+				}
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
+			finally{
+				try{
+					bufferedReader.close();
+					fileReader.close();
+				}
+				catch(Exception e){
+					System.out.println(e);
+				}
+			}
+		}
+	}
+
+### 装饰者模式
+
+Worker.java
+
+	interface Worker{
+		public void doSomeWork();
+	}
+
+Plumber.java
+
+	class Plumber implements Worker{
+		public void doSomeWork(){
+			System.out.println("I'm a Plumber.");
+		}
+	}
+
+Carpenter.java
+
+	class Carpenter implements Worker{
+		public void doSomeWork(){
+			System.out.println("I'm a Carpenter.");
+		}
+	}
+
+AWorker.java
+
+	class AWorker implements Worker{
+		private Worker worker;
+
+		public AWorker(Worker worker){
+			this.worker = worker;
+		}
+
+		public void doSomeWork(){
+			System.out.println("Hello, I'm come from A.");
+			this.worker.doSomeWork();
+		}
+	}
+
+TestWorker.java
+
+	class TestWorker{
+		public static void main(String args[]){
+			Plumber worker1 = new Plumber();
+			AWorker aWorker1 = new AWorker(worker1);
+			aWorker1.doSomeWork();
+
+			Carpenter worker2 = new Carpenter();
+			AWorker aWorker2 = new AWorker(worker2);
+			aWorker1.doSomeWork();
+		}
+	}
+	
 ## **多线程与多进程**
 
 **多进程**：
